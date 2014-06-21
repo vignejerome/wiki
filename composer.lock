@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "054732ed90cdf48bf80d881a14df82f7",
+    "hash": "0f5bf28fac35560dbdb2e597d32df056",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -909,7 +909,7 @@
         },
         {
             "name": "sensio/distribution-bundle",
-            "version": "dev-master",
+            "version": "v3.0.1",
             "target-dir": "Sensio/Bundle/DistributionBundle",
             "source": {
                 "type": "git",
@@ -1308,16 +1308,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "dev-master",
+            "version": "v2.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "71c3a3599c9c32c2feb09b67b6ec2b84eeb57f8f"
+                "reference": "59365832a09a1d914d14cbca6a21a7f572760c3b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/71c3a3599c9c32c2feb09b67b6ec2b84eeb57f8f",
-                "reference": "71c3a3599c9c32c2feb09b67b6ec2b84eeb57f8f",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/59365832a09a1d914d14cbca6a21a7f572760c3b",
+                "reference": "59365832a09a1d914d14cbca6a21a7f572760c3b",
                 "shasum": ""
             },
             "require": {
@@ -1325,7 +1325,7 @@
                 "php": ">=5.3.3",
                 "psr/log": "~1.0",
                 "symfony/icu": "~1.0",
-                "twig/twig": "~1.12"
+                "twig/twig": "~1.11"
             },
             "replace": {
                 "symfony/browser-kit": "self.version",
@@ -1374,7 +1374,6 @@
             "require-dev": {
                 "doctrine/data-fixtures": "1.0.*",
                 "doctrine/dbal": "~2.2",
-                "doctrine/doctrine-bundle": "~1.2",
                 "doctrine/orm": "~2.2,>=2.2.3",
                 "egulias/email-validator": "1.1.0",
                 "ircmaxell/password-compat": "1.0.*",
@@ -1385,7 +1384,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.6-dev"
+                    "dev-master": "2.5-dev"
                 }
             },
             "autoload": {
@@ -1421,7 +1420,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2014-06-18 12:04:38"
+            "time": "2014-05-31 18:45:50"
         },
         {
             "name": "twig/extensions",
@@ -1586,10 +1585,9 @@
 
     ],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "symfony/symfony": 20,
-        "sensio/distribution-bundle": 20
-    },
+    "stability-flags": [
+
+    ],
     "platform": {
         "php": ">=5.3.3"
     },
