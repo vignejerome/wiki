@@ -6,7 +6,6 @@ vendor/*
 */logs/*
 */cache/*
 web/uploads/*
-web/bundles/*
 
 # Configuration files
 app/config/parameters.ini
@@ -14,3 +13,7 @@ app/config/parameters.yml
 
 # Composer
 composer.phar
+
+# MAC
+*/.DS_Store
+.DS_Store

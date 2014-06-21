@@ -1,0 +1,7 @@
+wiki_general_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: WikiGeneralBundle:Default:index }
+
+wiki_general_page:
+    pattern:  /page
+    defaults: { _controller: WikiGeneralBundle:Default:page }
