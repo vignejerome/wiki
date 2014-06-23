@@ -1,0 +1,3 @@
+wiki_user_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: WikiUserBundle:Default:index }

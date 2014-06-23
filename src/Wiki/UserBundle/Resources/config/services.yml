@@ -1,0 +1,7 @@
+parameters:
+#    wiki_user.example.class: Wiki\UserBundle\Example
+
+services:
+#    wiki_user.example:
+#        class: %wiki_user.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
