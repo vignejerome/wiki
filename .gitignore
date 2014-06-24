@@ -15,6 +15,8 @@ app/config/parameters.yml
 # Composer
 composer.phar
 
+web/app_dev.php
+
 # MAC
 */.DS_Store
 .DS_Store

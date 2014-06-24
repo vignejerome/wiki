@@ -21,6 +21,21 @@ class Category
      */
     private $id;
 
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    protected $name;
+
+
+    /**
+     * @ORM\OneToMany(targetEntity="Page", mappedBy="category")
+     */
+    protected $pages;
+
+    public function __construct()
+    {
+        $this->pages = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -30,5 +45,61 @@ class Category
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return Category
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Add pages
+     *
+     * @param \Wiki\GeneralBundle\Entity\Page $pages
+     * @return Category
+     */
+    public function addPage(\Wiki\GeneralBundle\Entity\Page $pages)
+    {
+        $this->pages[] = $pages;
+
+        return $this;
+    }
+
+    /**
+     * Remove pages
+     *
+     * @param \Wiki\GeneralBundle\Entity\Page $pages
+     */
+    public function removePage(\Wiki\GeneralBundle\Entity\Page $pages)
+    {
+        $this->pages->removeElement($pages);
+    }
+
+    /**
+     * Get pages
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPages()
+    {
+        return $this->pages;
     }
 }
