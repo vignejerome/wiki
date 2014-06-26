@@ -3,6 +3,7 @@
 namespace Wiki\GeneralBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Category
@@ -22,13 +23,13 @@ class Category
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=100, unique=true)
      */
     protected $name;
 
 
     /**
-     * @ORM\OneToMany(targetEntity="Page", mappedBy="category")
+     * @ORM\OneToMany(targetEntity="Page", mappedBy="category", cascade={"persist"})
      */
     protected $pages;
 
@@ -40,7 +41,7 @@ class Category
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -63,7 +64,7 @@ class Category
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -96,7 +97,7 @@ class Category
     /**
      * Get pages
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getPages()
     {

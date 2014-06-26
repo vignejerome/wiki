@@ -4,6 +4,12 @@ namespace Wiki\GeneralBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+// these import the "@Route" and "@Template" annotations
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+
+use Wiki\GeneralBundle\Entity\Page;
+
 class DefaultController extends Controller
 {
     public function indexAction($name)
@@ -11,37 +17,72 @@ class DefaultController extends Controller
         return $this->render('WikiGeneralBundle:Default:index.html.twig', array('name' => $name));
     }
 
-    public function pageAction()
+    /**
+     * Affichage de la page
+     *
+     * @Route("/page/{title}", name="_wiki_page")
+     * @Template()
+     */
+    public function pageAction($title)
     {
-        $title = "title";
-        $body = "body";
-        return $this->render('WikiGeneralBundle:Default:page.html.twig', array('title' => $title, 'body' => $body));
+        $page = $this->getDoctrine()
+        ->getRepository('WikiGeneralBundle:Page')
+        ->findOneByTitle($title);
+
+        if (!$page) {
+            throw $this->createNotFoundException(
+                'Aucune page trouvée pour ce titre : '.$title
+            );
+        }
+        return $this->render('WikiGeneralBundle:Default:page.html.twig', array('page' => $page));
     }
 
 
-    /**
-     * Méthode de création d'une page
-     *
-     * @param $category_id identifiant de la category
-     * @param $title titre de la page
-     * @param $body texte de la page
-     */
-    public function createPageAction($category_id, $title, $body)
+   /**
+    * Création d'une page
+    *
+    * @Route("/create-page", name="_wiki_createPage")
+    * @Template()
+    */
+    public function createPageAction()
     {
-        $category = $this->getDoctrine()
-        ->getRepository('WikiGeneralBundle:Category')
-        ->find($category_id);
-
         $page = new Page();
-        $page->setTitle($title);
-        $page->setBody($body);
-        // lie ce produit à une catégorie
-        $page->setCategory($category);
+        $form = $this->createForm('page', $page);
 
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($page);
-        $em->flush();
+        // On récupère la requête
+        $request = $this->get('request');
+        // On vérifie qu'elle est de type POST
+        if ($request->getMethod() == 'POST') {
+          // On fait le lien Requête <-> Formulaire
+          // À partir de maintenant, la variable $page contient les valeurs entrées dans le formulaire par le visiteur
+          $form->bind($request);
+          // On vérifie que les valeurs entrées sont correctes
+          // (Nous verrons la validation des objets en détail dans le prochain chapitre)
+          if ($form->isValid()) {
+            // On l'enregistre notre objet $article dans la base de données
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($page);
+            $em->flush();
+            // On redirige vers la page de visualisation de l'article nouvellement créé
+            return $this->redirect($this->generateUrl('_wiki_page', array('title' => $page->getTitle())));
+          }
+        }
 
-        return new Response('La page : '.$page->getTitle().' a été créée dans la catégorie : '.$category->getName());
+        return $this->render('WikiGeneralBundle:Default:createPage.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }
+    /**
+     * Méthode retournant une page
+     *
+     * @param $page_id
+     */
+    public function getPageAction($page_id)
+    {
+        $page = $this->getDoctrine()
+        ->getRepository('WikiGeneralBundle:page')
+        ->find($page_id);
+
+        return new Response('La page : '.$page->getTitle());
     }
 }

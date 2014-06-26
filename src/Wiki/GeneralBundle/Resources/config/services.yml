@@ -2,6 +2,7 @@ parameters:
 #    wiki_general.example.class: Wiki\GeneralBundle\Example
 
 services:
-#    wiki_general.example:
-#        class: %wiki_general.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    acme_demo.form.type.task:
+        class: Wiki\GeneralBundle\Form\Type\PageType
+        tags:
+            - { name: form.type, alias: page }

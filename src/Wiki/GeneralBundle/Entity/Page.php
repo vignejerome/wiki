@@ -39,7 +39,7 @@ class Page
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="Category", inversedBy="pages")
+     * @ORM\OneToOne(targetEntity="Category", inversedBy="pages", cascade={"persist"})
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      */
     protected $category;
@@ -49,7 +49,7 @@ class Page
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -72,7 +72,7 @@ class Page
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -95,7 +95,7 @@ class Page
     /**
      * Get body
      *
-     * @return string 
+     * @return string
      */
     public function getBody()
     {
@@ -118,7 +118,7 @@ class Page
     /**
      * Get category
      *
-     * @return \Wiki\GeneralBundle\Entity\Category 
+     * @return \Wiki\GeneralBundle\Entity\Category
      */
     public function getCategory()
     {
