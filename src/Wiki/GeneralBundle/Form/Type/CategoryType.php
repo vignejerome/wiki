@@ -12,8 +12,9 @@ class CategoryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-          ->add('category', 'entity', array('class' => 'Wiki\GeneralBundle\Entity\Category',
-                                            'property' => 'name'));
+          ->add('category', 'entity', array(
+                'class' => 'Wiki\GeneralBundle\Entity\Category',
+                'property' => 'name'));
     }
 
     public function getName()

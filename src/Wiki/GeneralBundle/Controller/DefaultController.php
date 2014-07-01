@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 use Wiki\GeneralBundle\Entity\Page;
+use Wiki\GeneralBundle\Entity\Category;
 
 class DefaultController extends Controller
 {
@@ -59,7 +60,7 @@ class DefaultController extends Controller
           // On vérifie que les valeurs entrées sont correctes
           // (Nous verrons la validation des objets en détail dans le prochain chapitre)
           if ($form->isValid()) {
-            // On l'enregistre notre objet $article dans la base de données
+            // On l'enregistre notre objet $page dans la base de données
             $em = $this->getDoctrine()->getManager();
             $em->persist($page);
             $em->flush();

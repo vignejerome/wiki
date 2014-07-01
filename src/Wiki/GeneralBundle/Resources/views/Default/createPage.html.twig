@@ -15,16 +15,9 @@
         {{ form_errors(form.body) }}
       </div>
     {% endif %}
-
-    <div class="form-group" id="category">
-      {{ form_label(form.category, "Nom de la categorie") }}
-      <ul class="tags" data-prototype="{{ form_widget(form.category.vars.prototype)|e }}">
-        {# itère sur chaque tag existant et affiche son unique champ : name #}
-        {% for category in form.category %}
-            <li>{{ form_row(category.name) }}</li>
-        {% endfor %}
-      </ul>
-
+    <div class="form-group">
+      {{ form_label(form.category, "Selectionner la categorie") }}
+      {{ form_widget(form.category, {'attr': {'class': 'form-control input-lg', 'tabindex': '2', 'data-prototype':'{{ form.category.vars.prototype.name|e }}' }}) }}
     </div>
     <div class="form-group">
       {{ form_label(form.title, "Titre de l'article") }}

@@ -11,10 +11,13 @@ class PageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-          ->add('category', 'collection', array('type' => new CategoryType(),
-                                                'allow_add' => true,
-                                                'by_reference' => false,
-                                                ))
+          ->add('category', 'entity', array(
+                'class' => 'Wiki\GeneralBundle\Entity\Category',
+                'property' => 'name'))
+          // ->add('category', 'collection', array('type' => new CategoryType(),
+          //                                       'allow_add' => true,
+          //                                       'by_reference' => false,
+          //                                       ))
           ->add('title', 'text')
           ->add('body', 'textarea')
           ->add('save', 'submit')
