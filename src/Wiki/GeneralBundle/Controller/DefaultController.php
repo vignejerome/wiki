@@ -28,7 +28,7 @@ class DefaultController extends Controller
     {
         $page = $this->getDoctrine()
         ->getRepository('WikiGeneralBundle:Page')
-        ->findOneByTitle($title);
+        ->findOneBy(array('title' => $title));
 
         if (!$page) {
             throw $this->createNotFoundException(

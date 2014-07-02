@@ -3,6 +3,7 @@
 namespace Wiki\GeneralBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Page
@@ -25,6 +26,7 @@ class Page
      * @var text $title
      *
      * @ORM\Column(name="title", type="text", nullable=false)
+     * @Assert\NotBlank(message = "page.title.not_blank")
      */
     private $title;
 
@@ -33,6 +35,7 @@ class Page
      * @var text $body
      *
      * @ORM\Column(name="body", type="text", nullable=false)
+     * @Assert\NotBlank(message = "page.body.not_blank")
      */
     private $body;
 
