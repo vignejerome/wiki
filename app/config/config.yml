@@ -34,7 +34,7 @@ twig:
 assetic:
     debug:          "%kernel.debug%"
     use_controller: false
-    bundles:        [ ]
+    bundles:        [ WikiGeneralBundle, LexikTranslationBundle ]
     #java: /usr/bin/java
     filters:
         cssrewrite: ~
@@ -75,3 +75,9 @@ fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
     user_class: Wiki\UserBundle\Entity\User
+
+# LexikTranslationBundle configuration
+lexik_translation:
+    fallback_locale: en      # (required) default locale to use
+    managed_locales: [en, fr]    # (required) locales that the bundle have to manage
+    base_layout:     "LexikTranslationBundle::layout.html.twig"

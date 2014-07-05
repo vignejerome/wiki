@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new Wiki\UserBundle\WikiUserBundle(),
 
             new FOS\UserBundle\FOSUserBundle(),
+            new Lexik\Bundle\TranslationBundle\LexikTranslationBundle(),
 
         );
 
