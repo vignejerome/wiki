@@ -1,8 +1,3 @@
-wiki_general_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: WikiGeneralBundle:Default:index }
-
-
-_wiki:
-    resource: "@WikiGeneralBundle/Controller/DefaultController.php"
+_wiki_default:
+    resource: "@WikiGeneralBundle/Controller"
     type:     annotation

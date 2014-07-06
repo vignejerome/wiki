@@ -1,0 +1,10 @@
+<ul class="nav nav-sidebar">
+{% for category in categorys %}
+  <li>{{ category.name|e }}</li>
+  <ul>
+    {% for page in category.pages %}
+      <li class=""><a href="{{ path('_wiki_page', { 'slug': page.slug }) }}">{{ page.title }}</a></li>
+    {% endfor %}
+  </ul>
+{% endfor %}
+</ul>

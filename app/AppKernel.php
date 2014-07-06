@@ -23,6 +23,7 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new Lexik\Bundle\TranslationBundle\LexikTranslationBundle(),
             new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
+            new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
 
         );
 

@@ -20,6 +20,7 @@ class PageType extends AbstractType
           //                                       ))
           ->add('title', 'text')
           ->add('body', 'textarea')
+          ->add('date', 'hidden', array('data' => date('m.d.y')))
           ->add('save', 'submit')
         ;
     }

@@ -39,6 +39,20 @@ class Page
      */
     private $body;
 
+    /**
+     * @var text $slug
+     *
+     * @ORM\Column(name="slug", type="string", nullable=false, unique=true)
+     */
+    private $slug;
+
+    /**
+     * @var date $date
+     *
+     * @ORM\Column(name="date", type="datetime", nullable=false)
+     */
+    private $date;
+
 
 
     /**
@@ -68,6 +82,8 @@ class Page
     public function setTitle($title)
     {
         $this->title = $title;
+
+        $this->setSlug($this->title);
 
         return $this;
     }
@@ -126,5 +142,83 @@ class Page
     public function getCategory()
     {
         return $this->category;
+    }
+
+    /**
+     * Set date
+     *
+     * @param \DateTime $date
+     * @return Page
+     * @ORM\PrePersist
+     */
+    public function setDate($date)
+    {
+        $this->date = new \DateTime();
+
+        return $this;
+    }
+
+    /**
+     * Get date
+     *
+     * @return \DateTime
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Page
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $this->slugify($slug);
+
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+    * Fonction permettant la génération d'une url
+    *
+    */
+    public function slugify($text)
+    {
+        // replace non letter or digits by -
+        $text = preg_replace('#[^\\pL\d]+#u', '-', $text);
+
+        // trim
+        $text = trim($text, '-');
+
+        // transliterate
+        if (function_exists('iconv'))
+        {
+            $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
+        }
+
+        // lowercase
+        $text = strtolower($text);
+
+        // remove unwanted characters
+        $text = preg_replace('#[^-\w]+#', '', $text);
+
+        if (empty($text))
+        {
+            return 'n-a';
+        }
+
+        return $text;
     }
 }

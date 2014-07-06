@@ -13,6 +13,9 @@ use Wiki\GeneralBundle\Entity\Category;
 
 class DefaultController extends Controller
 {
+    /**
+     * @Route("/")
+     */
     public function indexAction($name)
     {
         return $this->render('WikiGeneralBundle:Default:index.html.twig', array('name' => $name));
@@ -21,18 +24,18 @@ class DefaultController extends Controller
     /**
      * Affichage de la page
      *
-     * @Route("/page/{title}", name="_wiki_page")
+     * @Route("/page/{slug}", name="_wiki_page")
      * @Template()
      */
-    public function pageAction($title)
+    public function pageAction($slug)
     {
         $page = $this->getDoctrine()
         ->getRepository('WikiGeneralBundle:Page')
-        ->findOneBy(array('title' => $title));
+        ->findOneBy(array('slug' => $slug));
 
         if (!$page) {
             throw $this->createNotFoundException(
-                'Aucune page trouvée pour ce titre : '.$title
+                'Aucune page trouvée pour cette url'
             );
         }
         return $this->render('WikiGeneralBundle:Default:page.html.twig', array('page' => $page));
@@ -65,7 +68,7 @@ class DefaultController extends Controller
             $em->persist($page);
             $em->flush();
             // On redirige vers la page de visualisation de l'article nouvellement créé
-            return $this->redirect($this->generateUrl('_wiki_page', array('title' => $page->getTitle())));
+            return $this->redirect($this->generateUrl('_wiki_page', array('slug' => $page->getSlug())));
           }
         }
 
