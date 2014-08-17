@@ -78,6 +78,8 @@ class DefaultController extends Controller
             'form' => $form->createView(),
         ));
     }
+
+
     /**
      * Méthode retournant une page
      *

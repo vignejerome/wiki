@@ -14,12 +14,8 @@ class PageType extends AbstractType
           ->add('category', 'entity', array(
                 'class' => 'Wiki\GeneralBundle\Entity\Category',
                 'property' => 'name'))
-          // ->add('category', 'collection', array('type' => new CategoryType(),
-          //                                       'allow_add' => true,
-          //                                       'by_reference' => false,
-          //                                       ))
           ->add('title', 'text')
-          ->add('body', 'textarea')
+          ->add('body', 'textarea' , array('attr' => array('cols' => '5', 'rows' => '10')))
           ->add('date', 'hidden', array('data' => date('m.d.y')))
           ->add('save', 'submit')
         ;

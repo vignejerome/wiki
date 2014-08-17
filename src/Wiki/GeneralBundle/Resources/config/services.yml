@@ -2,7 +2,11 @@ parameters:
 #    wiki_general.example.class: Wiki\GeneralBundle\Example
 
 services:
-    acme_demo.form.type.task:
+    wiki_general.form.type.page:
         class: Wiki\GeneralBundle\Form\Type\PageType
         tags:
             - { name: form.type, alias: page }
+    wiki_general.form.type.category:
+        class: Wiki\GeneralBundle\Form\Type\CategoryType
+        tags:
+            - { name: form.type, alias: category }

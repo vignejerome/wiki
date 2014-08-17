@@ -12,9 +12,8 @@ class CategoryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-          ->add('category', 'entity', array(
-                'class' => 'Wiki\GeneralBundle\Entity\Category',
-                'property' => 'name'));
+          ->add('name', 'text')
+        ;
     }
 
     public function getName()
@@ -26,6 +25,11 @@ class CategoryType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'Wiki\GeneralBundle\Entity\Category',
+            'cascade_validation' => true,
+            'csrf_protection' => true,
+            'csrf_field_name' => '_token',
+            // une clé unique pour aider à la génération du jeton secret
+            'intention'       => 'page_item',
         ));
     }
 }

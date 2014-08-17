@@ -4,6 +4,7 @@ namespace Wiki\GeneralBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Category
@@ -24,6 +25,7 @@ class Category
 
     /**
      * @ORM\Column(type="string", length=100, unique=true)
+     * @Assert\NotBlank(message = "category.name.not_blank")
      */
     protected $name;
 
