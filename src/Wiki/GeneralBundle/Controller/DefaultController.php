@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 // these import the "@Route" and "@Template" annotations
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 use Wiki\GeneralBundle\Entity\Page;
 use Wiki\GeneralBundle\Entity\Category;
@@ -45,8 +46,9 @@ class DefaultController extends Controller
    /**
     * Création d'une page
     *
-    * @Route("/create-page", name="_wiki_createPage")
+    * @Route("create-page", name="_wiki_createPage")
     * @Template()
+    * @Security("has_role('ROLE_ADMIN')")
     */
     public function createPageAction()
     {
