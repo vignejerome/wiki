@@ -81,9 +81,9 @@ class Page
      */
     public function setTitle($title)
     {
-        $this->title = $title;
+        $this->title = ucfirst($title);
 
-        $this->setSlug($this->title);
+        $this->setSlug($title);
 
         return $this;
     }

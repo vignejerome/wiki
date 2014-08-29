@@ -15,12 +15,15 @@
         <li style="padding-left:10px;">
           <a href="#" data-toggle="collapse" data-target="#toggleDemo{{ loop.index }}" data-parent="#sidenav01" class="collapsed">
           <i class="fa fa-cloud"></i> {{ category.name|e }} <span class="caret pull-right"></span>
-          </a><a class="" href="{{ path('_wiki_deleteCategory', {'id': category.id})}}"><i class="fa fa-times text-danger"></i></a>
+          </a>
           <div class="collapse" id="toggleDemo{{ loop.index }}" style="height: 0px;">
             <ul class="nav nav-list">
               {% for page in category.pages %}
 	      		     <li class=""><a href="{{ path('_wiki_page', { 'slug': page.slug }) }}"><i class="fa fa-link"></i> {{ page.title }}</a></li>
 	    	      {% endfor %}
+              {% if is_granted('ROLE_ADMIN') %}
+                <li><a class="" href="{{ path('_wiki_deleteCategory', {'id': category.id})}}" onclick="return confirm('êtes-vous sur ?')"><i class="fa fa-times text-danger"> Supprimer</i></a></li>
+              {% endif %}
             </ul>
           </div>
         </li>

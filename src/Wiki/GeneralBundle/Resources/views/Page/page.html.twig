@@ -4,7 +4,7 @@
 {% block content %}
    <p>{{ page.body|markdown }}</p>
    {% if is_granted('ROLE_ADMIN') %}
-     <a class="btn btn-danger" href="{{ path('_wiki_deletePage', {'id': page.id})}}" role="button">Supprimer</a>
+     <a class="btn btn-danger" href="{{ path('_wiki_deletePage', {'id': page.id})}}" role="button" onclick="return confirm('êtes-vous sur ?')">Supprimer</a>
    {% endif %}
    
 {% endblock %}
