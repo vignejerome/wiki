@@ -2,6 +2,7 @@
 
 {% block stylesheets %}
   <link rel="stylesheet" href="{{ asset('bundles/wiki/css/style.css') }}" />
+  <link rel="stylesheet" href="{{ asset('bundles/wiki/css/font-awesome.min.css') }}" />
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 
 {% endblock %}
@@ -24,9 +25,16 @@
           </div>
           <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="{{ path('_wiki_createPage') }}">Créer une page</a></li>
-              <li><a href="{{ path('_wiki_createCategory') }}">Ajouter une catégorie</a></li>
-              <li><a href="#">Profil</a></li>
+              <li><a href="{{ path('_wiki_createPage') }}"><i class="fa fa-plus fa-fw"></i> Page</a></li>
+              <li><a href="{{ path('_wiki_createCategory') }}"><i class="fa fa-plus fa-fw"></i> Catégorie</a></li>
+              {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                  <li><a href="#">{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}</a></li>
+                  <li><a href="{{ path('fos_user_security_logout') }}">
+                      {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                  </a></li>
+              {% else %}
+                  <li><a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a></li>
+              {% endif %}
             </ul>
             <form class="navbar-form navbar-left">
               <input class="form-control" placeholder="Search..." type="text">
@@ -40,7 +48,7 @@
         <div class="col-sm-3 col-md-2 sidebar">
             {{ render(controller('WikiGeneralBundle:Category:showCategoryWithPage')) }}
         </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <div class="col-sm-9 col-md-10 affix-content">
           {% block content %}{% endblock %}
         </div>
       </div>

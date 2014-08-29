@@ -63,8 +63,34 @@ class CategoryController extends Controller
            }
          }
 
-         return $this->render('WikiGeneralBundle:Default:createCategory.html.twig', array(
+         return $this->render('WikiGeneralBundle:Category:createCategory.html.twig', array(
              'form' => $form->createView(),
          ));
      }
+
+         /**
+    * Suppression d'une categorie
+    *
+    * @Route("delete-category/{id}", name="_wiki_deleteCategory")
+    * @Template()
+    * @Security("has_role('ROLE_ADMIN')")
+    */
+    public function deleteCategoryAction($id)
+    {
+      $category = $this->getDoctrine()
+        ->getRepository('WikiGeneralBundle:Category')
+        ->findOneBy(array('id' => $id));
+
+        if ($category) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($category);
+            $em->flush();
+
+            return $this->render('WikiGeneralBundle:Category:deleteCategory.html.twig', array('category' => $category));
+        }else{
+          throw $this->createNotFoundException(
+                'Aucune category trouvée pour cette url'
+            );
+        }
+    }
 }

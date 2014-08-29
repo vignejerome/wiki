@@ -12,14 +12,14 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Wiki\GeneralBundle\Entity\Page;
 use Wiki\GeneralBundle\Entity\Category;
 
-class DefaultController extends Controller
+class PageController extends Controller
 {
     /**
      * @Route("/")
      */
-    public function indexAction($name)
+    public function indexAction()
     {
-        return $this->render('WikiGeneralBundle:Default:index.html.twig', array('name' => $name));
+        return $this->render('WikiGeneralBundle:layout.html.twig');
     }
 
     /**
@@ -39,7 +39,7 @@ class DefaultController extends Controller
                 'Aucune page trouvée pour cette url'
             );
         }
-        return $this->render('WikiGeneralBundle:Default:page.html.twig', array('page' => $page));
+        return $this->render('WikiGeneralBundle:Page:page.html.twig', array('page' => $page));
     }
 
 
@@ -74,23 +74,34 @@ class DefaultController extends Controller
           }
         }
 
-        return $this->render('WikiGeneralBundle:Default:createPage.html.twig', array(
+        return $this->render('WikiGeneralBundle:Page:createPage.html.twig', array(
             'form' => $form->createView(),
         ));
     }
 
-
     /**
-     * Méthode retournant une page
-     *
-     * @param $page_id
-     */
-    public function getPageAction($page_id)
+    * Suppression d'une page
+    *
+    * @Route("delete-page/{id}", name="_wiki_deletePage")
+    * @Template()
+    * @Security("has_role('ROLE_ADMIN')")
+    */
+    public function deletePageAction($id)
     {
-        $page = $this->getDoctrine()
-        ->getRepository('WikiGeneralBundle:page')
-        ->find($page_id);
+      $page = $this->getDoctrine()
+        ->getRepository('WikiGeneralBundle:Page')
+        ->findOneBy(array('id' => $id));
 
-        return new Response('La page : '.$page->getTitle());
+        if ($page) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($page);
+            $em->flush();
+
+            return $this->render('WikiGeneralBundle:Page:deletePage.html.twig', array('page' => $page));
+        }else{
+          throw $this->createNotFoundException(
+                'Aucune page trouvée pour cette url'
+            );
+        }
     }
 }
