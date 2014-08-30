@@ -14,13 +14,6 @@ use Wiki\GeneralBundle\Entity\Category;
 
 class PageController extends Controller
 {
-    /**
-     * @Route("/")
-     */
-    public function indexAction()
-    {
-        return $this->render('WikiGeneralBundle:layout.html.twig');
-    }
 
     /**
      * Affichage de la page
