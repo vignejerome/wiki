@@ -131,3 +131,12 @@ body {
         margin-left: auto;
     }
 }
+
+/* Retour en haut */
+.back-to-top {
+    cursor: pointer;
+    position: fixed;
+    bottom: 25px;
+    right: 35px;
+    display:none;
+}

@@ -25,9 +25,9 @@
                     <i class="fa fa-plus fa-fw"></i>  <i class="fa fa-caret-down"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-user">
-                    <li><a href="{{ path('_wiki_createPage') }}"><i class="fa fa-file fa-fw"></i> Page</a>
+                    <li><a href="{{ path('_wiki_createPage') }}"><i class="fa fa-file fa-fw"></i> Ajouter une page</a>
                     </li>
-                    <li><a href="{{ path('_wiki_createCategory') }}"><i class="fa fa-folder fa-fw"></i> Categorie</a>
+                    <li><a href="{{ path('_wiki_createCategory') }}"><i class="fa fa-folder fa-fw"></i> Ajouter une categorie</a>
                     </li>
                 </ul>
                 <!-- /.dropdown-user -->
@@ -40,7 +40,7 @@
                 <ul class="dropdown-menu dropdown-user">
                     <li><a href="#"><i class="fa fa-user fa-fw"></i> Profil</a>
                     </li>
-                    <li><a href="#"><i class="fa fa-gear fa-fw"></i> Message</a>
+                    <li><a href="{{ path('lexik_translation_grid')}}"><i class="fa fa-gear fa-fw"></i> Message</a>
                     </li>
                     <li class="divider"></li>
                     <li><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out fa-fw"></i> Se deconnecter</a>
