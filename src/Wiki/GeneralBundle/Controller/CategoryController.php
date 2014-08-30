@@ -68,7 +68,8 @@ class CategoryController extends Controller
          ));
      }
 
-         /**
+    /**
+    *
     * Suppression d'une categorie
     *
     * @Route("delete-category/{id}", name="_wiki_deleteCategory")
@@ -83,9 +84,14 @@ class CategoryController extends Controller
 
         if ($category) {
             $em = $this->getDoctrine()->getManager();
+            $pages = $category->getPages();
+            if ( !empty($pages) ){
+                foreach ($pages as $page){
+                    $em->remove($page);
+                }                
+            }
             $em->remove($category);
             $em->flush();
-
             return $this->render('WikiGeneralBundle:Category:deleteCategory.html.twig', array('category' => $category));
         }else{
           throw $this->createNotFoundException(
