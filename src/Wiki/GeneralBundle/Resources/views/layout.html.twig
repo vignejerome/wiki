@@ -1,60 +1,93 @@
 {% extends '::base.html.twig' %}
 
-{% block stylesheets %}
-  <link rel="stylesheet" href="{{ asset('bundles/wiki/css/style.css') }}" />
-  <link rel="stylesheet" href="{{ asset('bundles/wiki/css/font-awesome.min.css') }}" />
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-
-{% endblock %}
-
 {% block title 'Demo Bundle' %}
 
 {% block body %}
 
+    <div id="wrapper">
+    <!-- Navigation -->
     {% block content_header %}
-      <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <div class="container-fluid">
-          <div class="navbar-header">
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">Wiki</a>
-          </div>
-          <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="{{ path('_wiki_createPage') }}"><i class="fa fa-plus fa-fw"></i> Page</a></li>
-              <li><a href="{{ path('_wiki_createCategory') }}"><i class="fa fa-plus fa-fw"></i> Catégorie</a></li>
-              {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                  <li><a href="#">{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}</a></li>
-                  <li><a href="{{ path('fos_user_security_logout') }}">
-                      {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
-                  </a></li>
-              {% else %}
-                  <li><a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a></li>
-              {% endif %}
-            </ul>
-            <form class="navbar-form navbar-left">
-              <input class="form-control" placeholder="Search..." type="text">
-            </form>
-          </div>
+            <a class="navbar-brand" href="/">Wiki personnel</a>
         </div>
-      </div>
+        <!-- /.navbar-header -->
+        {% if is_granted('ROLE_ADMIN') %}
+        <ul class="nav navbar-top-links navbar-right">
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-plus fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li><a href="{{ path('_wiki_createPage') }}"><i class="fa fa-file fa-fw"></i> Page</a>
+                    </li>
+                    <li><a href="{{ path('_wiki_createCategory') }}"><i class="fa fa-folder fa-fw"></i> Categorie</a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-user -->
+            </li>
+            <!-- /.dropdown -->
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li><a href="#"><i class="fa fa-user fa-fw"></i> Profil</a>
+                    </li>
+                    <li><a href="#"><i class="fa fa-gear fa-fw"></i> Message</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out fa-fw"></i> Se deconnecter</a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-user -->
+            </li>
+            <!-- /.dropdown -->
+        </ul>
+        <!-- /.navbar-top-links -->
+        {% endif %}
+        
+        <div class="navbar-default sidebar" role="navigation">
+            <div class="sidebar-nav navbar-collapse" id="filter">
+              <div class="sidebar-search">
+                <div class="input-group custom-search-form" >
+                    <input type="text" class="form-control search" placeholder="Search...">
+                    <span class="input-group-btn">
+                    <button class="btn btn-default" type="button">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </span>
+                </div>
+              </div>
+              <ul class="nav list" id="side-menu">
+                  {{ render(controller('WikiGeneralBundle:Category:showCategoryWithPage')) }}
+              </ul>
+            </div>
+            <!-- /.sidebar-collapse -->
+        </div>
+        <!-- /.navbar-static-side -->
+    </nav>
     {% endblock %}
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-            {{ render(controller('WikiGeneralBundle:Category:showCategoryWithPage')) }}
-        </div>
-        <div class="col-sm-9 col-md-10 affix-content">
-          {% block content %}{% endblock %}
-        </div>
-      </div>
+    <div id="page-wrapper">
+        {% block content %}{% endblock %}
     </div>
+    <!-- /#page-wrapper -->
+
+</div>
+<!-- /#wrapper -->
 {% endblock %}
 
+
 {% block javascripts %}
-  <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.1.1/list.min.js"></script>
+  <script src="{{ asset('bundles/wiki/js/wiki.js') }}"></script>
 {% endblock %}
+
+        
+
