@@ -56,7 +56,7 @@ class Page
 
 
     /**
-     * @ORM\OneToOne(targetEntity="Category", inversedBy="pages", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="pages", cascade={"persist"})
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      */
     protected $category;
