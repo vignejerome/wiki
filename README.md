@@ -8,6 +8,8 @@ Getting Started With Wiki
 3. Installation des vendors
 4. Verification de la configuration
 5. Création de la BDD
+6. Création du compte administrateur
+7. Lancer le projet
 
 ### Step 1: Installation de composer
 
