@@ -12,11 +12,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class GeneralController extends Controller
 {
     /**
-     * @Route("/")
+     * @Route("/" )
      * @Template()
      */
     public function indexAction()
     {
-        return $this->render('WikiGeneralBundle:layout.html.twig');
+        return $this->render('WikiGeneralBundle::layout.html.twig');
     }
 }
