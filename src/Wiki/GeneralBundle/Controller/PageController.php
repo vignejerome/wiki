@@ -130,7 +130,7 @@ class PageController extends Controller
             $em->remove($page);
             $em->flush();
 
-            return $this->render('WikiGeneralBundle:Page:deletePage.html.twig', array('page' => $page));
+            return $this->render('WikiGeneralBundle:Common:message.html.twig', array('text' => $page->getTitle()));
         }else{
           throw $this->createNotFoundException(
                 'Aucune page trouvée pour cette url'

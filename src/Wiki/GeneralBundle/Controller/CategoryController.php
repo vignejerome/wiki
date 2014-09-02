@@ -92,7 +92,7 @@ class CategoryController extends Controller
             }
             $em->remove($category);
             $em->flush();
-            return $this->render('WikiGeneralBundle:Category:deleteCategory.html.twig', array('category' => $category));
+            return $this->render('WikiGeneralBundle:Common:message.html.twig', array('category' => $category));
         }else{
           throw $this->createNotFoundException(
                 'Aucune category trouvée pour cette url'
